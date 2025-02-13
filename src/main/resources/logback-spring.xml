@@ -9,18 +9,24 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+    <appender name="ASYNC_STANDARD" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>512</queueSize> <!-- Adjust based on load -->
+        <discardingThreshold>0</discardingThreshold>
+        <neverBlock>true</neverBlock>
+        <appender-ref ref="STANDARD"/>
+    </appender>
     <appender name="STANDARD" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="com.example.pocloggingmaskwithlayoutpattern.logging.layout.PatternMaskingLayout">
-                <maskPattern>email=[^\s]+</maskPattern>
-                <maskPattern>address=[^\s]+</maskPattern>
-                <pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex</pattern>-->
+            <layout class="com.example.pocloggingmaskwithlayoutpattern.logging.layout.PatternMaskingLayout3">
+<!--                <maskPattern>email=[^\s]+</maskPattern>-->    <!-- for PatternMaskingLayout and PatternMaskingLayout2-->
+<!--                <maskPattern>address=[^\s]+</maskPattern>-->
+                <pattern>%d{ISO8601} [%thread] %-5level %logger{20} - %mask(%msg) %n</pattern>
             </layout>
         </encoder>
     </appender>
     <springProfile name="local">
         <root level="INFO">
-            <appender-ref ref="STANDARD" />
+            <appender-ref ref="ASYNC_STANDARD" />
         </root>
     </springProfile>
 </configuration>
