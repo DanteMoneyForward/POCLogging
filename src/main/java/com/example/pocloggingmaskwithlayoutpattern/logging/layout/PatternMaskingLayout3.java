@@ -4,9 +4,11 @@ import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.pattern.PatternLayoutBase;
 import com.example.pocloggingmaskwithlayoutpattern.logging.converter.MaskedConverter;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Map;
 
+@Profile("pattern3")
 public class PatternMaskingLayout3 extends PatternLayoutBase<ILoggingEvent> {
   @Override
   public Map<String, String> getDefaultConverterMap() {
