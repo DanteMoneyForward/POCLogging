@@ -29,7 +29,33 @@
                 <pattern>%d{ISO8601} [%thread] %-5level %logger{20} - %mask(%msg) %n</pattern>
             </layout>
         </encoder>
+        <!-- Accept INFO level logs -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+
+        <!-- Accept ERROR level logs -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
+    <appender name="DEBUG_LOGS" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+
+        <!-- Accept DEBUG level logs -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
     <springProfile name="pattern">
         <root level="INFO">
             <appender-ref ref="STANDARD_1" />
@@ -40,9 +66,11 @@
             <appender-ref ref="STANDARD_2" />
         </root>
     </springProfile>
+
     <springProfile name="pattern3">
-        <root level="INFO">
-            <appender-ref ref="ASYNC_STANDARD" />
+        <root level= "INFO">
+            <appender-ref ref= "ASYNC_STANDARD" />
+            <appender-ref ref= "DEBUG_LOGS" />
         </root>
     </springProfile>
 </configuration>

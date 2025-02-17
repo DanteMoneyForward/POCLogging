@@ -13,5 +13,11 @@ public class TestLoggingRunner implements CommandLineRunner {
     log.info("This is a email=datneaddd@gmail.com, address=20NguyenCHanh test log");
     log.info("This is aemail=datneaddd@gmail.com test log");
     log.info("This is aaddress=20NguyenCHanh test log");
+    log.debug("This is a email=datneaddd@gmail.com, address=20NguyenCHanh test log");
+    log.debug("This is aemail=datneaddd@gmail.com test log");
+    log.debug("This is aaddress=20NguyenCHanh test log");
+    log.error("This is a email=datneaddd@gmail.com, address=20NguyenCHanh test log");
+    log.error("This is aemail=datneaddd@gmail.com test log");
+    log.error("This is aaddress=20NguyenCHanh test log");
   }
 }
